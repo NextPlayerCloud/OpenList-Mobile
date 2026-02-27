@@ -71,7 +71,7 @@ jobs:
       - uses: nttld/setup-ndk@v1
         id: setup-ndk
         with:
-          ndk-version: r27d
+          ndk-version: r28d
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
@@ -89,6 +89,7 @@ jobs:
           OPENLIST_BUILT_AT: ${{ needs.version.outputs.openlist_built_at }}
           OPENLIST_GIT_COMMIT: ${{ needs.version.outputs.openlist_git_commit }}
           OPENLIST_GIT_AUTHOR: The OpenList Projects Contributors <noreply@openlist.team>
+          CGO_LDFLAGS: "-O2 -s -w -Wl,-z,max-page-size=16384"
 
       - name: Upload OpenList Android AAR
         uses: actions/upload-artifact@v4
@@ -129,7 +130,6 @@ jobs:
           OPENLIST_BUILT_AT: ${{ needs.version.outputs.openlist_built_at }}
           OPENLIST_GIT_COMMIT: ${{ needs.version.outputs.openlist_git_commit }}
           OPENLIST_GIT_AUTHOR: The OpenList Projects Contributors <noreply@openlist.team>
-          CGO_LDFLAGS: "-O2 -s -w -Wl,-z,max-page-size=16384"
 
       - name: Upload OpenList iOS Framework
         uses: actions/upload-artifact@v4
